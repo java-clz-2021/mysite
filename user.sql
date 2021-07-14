@@ -29,5 +29,5 @@ values(seq_user_no.nextval, 'iremys', '1234', '황일영', 'male');
 select *
 from users;
 
-
+commit;
 rollback;
