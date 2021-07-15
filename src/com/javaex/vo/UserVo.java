@@ -3,6 +3,7 @@ package com.javaex.vo;
 public class UserVo {
 
 	// 필드
+	private int no;
 	private String id;
 	private String pw;
 	private String name;
@@ -11,16 +12,34 @@ public class UserVo {
 	// 생성자
 	public UserVo() {
 	}
+	
 
 	public UserVo(String id, String pw, String name, String gender) {
+		super();
 		this.id = id;
 		this.pw = pw;
 		this.name = name;
 		this.gender = gender;
+	}
 
+
+	public UserVo(int no, String id, String pw, String name, String gender) {
+		this.no = no;
+		this.id = id;
+		this.pw = pw;
+		this.name = name;
+		this.gender = gender;
 	}
 
 	// 메소드-gs
+	public int getNo() {
+		return no;
+	}
+
+	public void setNo(int no) {
+		this.no = no;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -56,8 +75,7 @@ public class UserVo {
 	// 메쇼드-일반
 	@Override
 	public String toString() {
-		return "UserVo [id=" + id + ", pw=" + pw + ", name=" + name + ", gender=" + gender + "]";
+		return "UserVo [no=" + no + ", id=" + id + ", pw=" + pw + ", name=" + name + ", gender=" + gender + "]";
 	}
 
-	
 }
