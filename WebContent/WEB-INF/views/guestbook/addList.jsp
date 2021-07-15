@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<%@ page import="com.javaex.vo.GuestbookVo" %>
+<%@ page import="java.util.List" %>
+<%
+	List<GuestbookVo> guestbookList = (List<GuestbookVo>)request.getAttribute("guestbookList");
+	System.out.println(guestbookList.toString());
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +23,7 @@
 
 		<div id="header" class="clearfix">
 			<h1>
-				<a href="">MySite</a>
+				<a href="/mysite/main">MySite</a>
 			</h1>
 
 			<!-- 
@@ -27,8 +34,8 @@
 			</ul>
 			-->
 			<ul>
-				<li><a href="" class="btn_s">로그인</a></li>
-				<li><a href="" class="btn_s">회원가입</a></li>
+				<li><a href="/mysite/user?action=loginForm" class="btn_s">로그인</a></li>
+				<li><a href="/mysite/user?action=joinForm" class="btn_s">회원가입</a></li>
 			</ul>
 
 		</div>
@@ -39,7 +46,7 @@
 				<li><a href="">입사지원서</a></li>
 				<li><a href="">게시판</a></li>
 				<li><a href="">갤러리</a></li>
-				<li><a href="">방명록</a></li>
+				<li><a href="/mysite/guest?action=addList">방명록</a></li>
 			</ul>
 		</div>
 		<!-- //nav -->
@@ -69,7 +76,7 @@
 				<!-- //content-head -->
 
 				<div id="guestbook">
-					<form action="" method="">
+					<form action="./guest" method="get">
 						<table id="guestAdd">
 							<colgroup>
 								<col style="width: 70px;">
@@ -106,44 +113,31 @@
 
 					</form>
 
-					<table class="guestRead">
-						<colgroup>
-							<col style="width: 10%;">
-							<col style="width: 40%;">
-							<col style="width: 40%;">
-							<col style="width: 10%;">
-						</colgroup>
-						<tr>
-							<td>1234555</td>
-							<td>이정재</td>
-							<td>2020-03-03 12:12:12</td>
-							<td><a href="">[삭제]</a></td>
-						</tr>
-						<tr>
-							<td colspan=4 class="text-left">방명록 글입니다. 방명록 글입니다.</td>
-						</tr>
-					</table>
-					<!-- //guestRead -->
-
-					<table class="guestRead">
-						<colgroup>
-							<col style="width: 10%;">
-							<col style="width: 40%;">
-							<col style="width: 40%;">
-							<col style="width: 10%;">
-						</colgroup>
-						<tr>
-							<td>1234555</td>
-							<td>이정재</td>
-							<td>2020-03-03 12:12:12</td>
-							<td><a href="">[삭제]</a></td>
-						</tr>
-						<tr>
-							<td colspan=4 class="text-left">방명록 글입니다. 방명록 글입니다.</td>
-						</tr>
-					</table>
-					<!-- //guestRead -->
-
+					<% 
+						for(int i=0; i<guestbookList.size(); i++){
+					%>
+							<table class="guestRead">
+								<colgroup>
+									<col style="width: 10%;">
+									<col style="width: 40%;">
+									<col style="width: 40%;">
+									<col style="width: 10%;">
+								</colgroup>
+								<tr>
+									<td><%=guestbookList.get(i).getNo() %></td>
+									<td><%=guestbookList.get(i).getName() %></td>
+									<td><%=guestbookList.get(i).getRegDate() %></td>
+									<td><a href="/mysite/guest?action=dForm&no=<%=guestbookList.get(i).getNo() %>">[삭제]</a></td>
+								</tr>
+								<tr>
+									<td colspan=4 class="text-left"><%=guestbookList.get(i).getContent() %></td>
+								</tr>
+							</table>
+							<!-- //guestRead -->
+					<% 
+						}
+					%>
+					
 				</div>
 				<!-- //guestbook -->
 

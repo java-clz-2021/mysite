@@ -15,7 +15,7 @@
 
 		<div id="header" class="clearfix">
 			<h1>
-				<a href="">MySite</a>
+				<a href="/mysite/main">MySite</a>
 			</h1>
 
 			<!-- 
@@ -26,8 +26,8 @@
 			</ul>
 			-->
 			<ul>
-				<li><a href="" class="btn_s">로그인</a></li>
-				<li><a href="" class="btn_s">회원가입</a></li>
+				<li><a href="/mysite/user?action=loginForm" class="btn_s">로그인</a></li>
+				<li><a href="/mysite/user?action=joinForm" class="btn_s">회원가입</a></li>
 			</ul>
 
 		</div>
@@ -38,7 +38,7 @@
 				<li><a href="">입사지원서</a></li>
 				<li><a href="">게시판</a></li>
 				<li><a href="">갤러리</a></li>
-				<li><a href="">방명록</a></li>
+				<li><a href="/mysite/guest?action=addList">방명록</a></li>
 			</ul>
 		</div>
 		<!-- //nav -->
@@ -64,7 +64,7 @@
 							자바 수업 + 데이터베이스 수업 + 웹프로그래밍 수업<br> 
 							배운 거 있는거 없는 거 다 합쳐서 만들어 놓은 사이트 입니다.<br> <br> 
 							(자유롭게 꾸며보세요!!)<br> <br> <br> 
-							<a class="" href="">[방명록에 글 남기기]</a>
+							<a class="" href="/mysite/guest?action=addList">[방명록에 글 남기기]</a>
 						</p>
 					</div>
 					<!-- //greetings -->
