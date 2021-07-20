@@ -91,8 +91,6 @@ public class UserController extends HttpServlet {
 			}
 			
 			
-			
-			
 		}else if("logout".equals(action)) {
 			System.out.println("[UserController.logout]");
 			
@@ -103,10 +101,53 @@ public class UserController extends HttpServlet {
 			
 			WebUtil.redirect(request, response, "/mysite/main");
 			
-		}
-		
+		}else if("modifyForm".equals(action)) {
+			System.out.println("[UserController.modifyForm]");
+			
+			//로그인한 사용자의 회원정보를 보여줘야 한다. --> 세션에서 가져온다
+			HttpSession session = request.getSession();
+			UserVo authUser= (UserVo)session.getAttribute("authUser");
+			int authUserNo = authUser.getNo();
+			/*  //위의 코드 다른 표현
+			HttpSession session = request.getSession();
+			int authUserNo = ((UserVo)session.getAttribute("authUser")).getNo();
+			*/
+			
+			//로그인한 사용자 회원정보 가져오기
+			UserDao userDao = new UserDao();
+			UserVo userVo = userDao.getUser(authUserNo);
+			
+			//리퀘스트 세션 영역에 로그인한 사용자 회원정보 넣기
+			request.setAttribute("userVo", userVo);
+			
+			//포원드 하기
+			WebUtil.forword(request, response, "/WEB-INF/views/user/modifyForm.jsp");
+			
+			
+		}else if("modify".equals(action)) {
+			System.out.println("[UserController.modify]");
+			
+			HttpSession session = request.getSession();
+			//vo만들기
+			//세션에서 로그인한 사용자의 no를 가져온다.
+			//나머지정보는 파라미터로 받는다.
+			int no = ((UserVo)session.getAttribute("authUser")).getNo();
+			String password = request.getParameter("pw");
+			String name = request.getParameter("name");
+			String gender = request.getParameter("gender");
 	
-		
+			UserVo userVo = new UserVo(no, password, name, gender);
+			
+			//db에 업데이트
+			UserDao userDao = new UserDao();
+			int count = userDao.userUpdate(userVo);
+			
+			//세션에 이름정보 업데이트(수정)
+			((UserVo)session.getAttribute("authUser")).setName(name);
+			
+			//리다이렉트
+			WebUtil.redirect(request, response, "/mysite/main");
+		}
 	}
 
 

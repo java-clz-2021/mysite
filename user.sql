@@ -29,5 +29,25 @@ values(seq_user_no.nextval, 'iremys', '1234', '황일영', 'male');
 select *
 from users;
 
+
+select no, name
+from users
+where id = 'iremys'
+and password = '1234';
+
+select no, id, password, name, gender
+from users
+where no = 1 ;
+
+--update 문
+update users
+set password = '1234',
+    name = '박명수',
+	gender = 'female'
+where no = 1;
+
+
+
+
 commit;
 rollback;
